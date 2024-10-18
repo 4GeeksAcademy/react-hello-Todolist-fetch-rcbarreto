@@ -13,6 +13,12 @@ const Home = () => {
         const nuevaLista = listaDeTareas.filter((_, i) => i !== index);
         setListaDeTareas(nuevaLista); 
     };
+	
+	const agregarTarea = (tarea) =>{
+		const nuevaLista = listaDeTareas.concat(tarea);
+		setListaDeTareas(nuevaLista); 
+	}
+
 
 	return (
 		
@@ -22,7 +28,13 @@ const Home = () => {
 
 			<div className="mx-auto col-6">
 		
-				<input type="email" className="form-control" placeholder=" ¿Que necesitas hacer?" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+				<input id = "tareaNueva" type="email" className="form-control" placeholder=" ¿Que necesitas hacer?" onKeyDown={(e) => {
+      				if (e.key === "Enter") {
+            			agregarTarea(document.getElementById("tareaNueva").value);
+            			document.getElementById("tareaNueva").value = ""; }}}/ 
+				>
+
+				{/* <button onClick={()=> agregarTarea(document.getElementById("tareaNueva").value)}></button> */}
 				
 				<ul className="">
 										
