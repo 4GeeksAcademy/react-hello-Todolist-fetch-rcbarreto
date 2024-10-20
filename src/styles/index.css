@@ -3,4 +3,9 @@ li:hover .hideIcon {
 }
 .hideIcon{
     visibility: hidden;
+    
+}
+
+li{
+    list-style: none;
 }
