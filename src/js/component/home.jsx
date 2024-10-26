@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
@@ -18,6 +18,19 @@ const Home = () => {
 		const nuevaLista = listaDeTareas.concat(tarea);
 		setListaDeTareas(nuevaLista); 
 	}
+
+	useEffect(()=>{
+		const cargarTareas = async() => {
+
+			const url = "https://playground.4geeks.com/todo/users/rcbarreto"
+			const resp = await fetch(url)
+			const data = await resp.json()
+			console.log(data)
+		}
+
+		cargarTareas()
+
+	},[])
 
 
 	return (
