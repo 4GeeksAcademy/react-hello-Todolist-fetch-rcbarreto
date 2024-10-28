@@ -13,9 +13,29 @@ const Home = () => {
 		setListaDeTareas(data.todos);
 };
 
-	useEffect(() => {
-		cargarTareas();
-	}, []);
+	const existeUsuario = async () =>{
+
+		const url = "https://playground.4geeks.com/todo/users/rcbarreto";
+
+		try{
+
+		
+			const response = await fetch(url);
+			
+			if (response.ok) {
+				const data = await response.json();
+				return true;  
+			} else {
+				const resp = await fetch (url, {
+				method:"POST",
+				
+			})
+			}
+		}catch (error) {
+			return false;
+				
+		}
+	}
 
 	async function agregarTareas(e) {
 
@@ -56,6 +76,16 @@ const Home = () => {
 		
 		}
 	}	
+
+	useEffect(() => {
+		  const iniciar = async () => {
+		  const usuarioExiste = await existeUsuario();
+		  if (usuarioExiste) {
+			await cargarTareas();
+		  }
+		};
+		iniciar();
+	  }, []);
 
 	return (
 		
