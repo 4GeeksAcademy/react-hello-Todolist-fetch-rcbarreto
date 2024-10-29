@@ -77,6 +77,21 @@ const Home = () => {
 		}
 	}	
 
+	const eliminarTodasLasTareas = async () => {
+    const url = "https://playground.4geeks.com/todo/todos/rcbarreto";
+    const resp = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (resp.ok) {
+      setListaDeTareas([]); // Vacía la lista local de tareas
+      console.log("Todas las tareas han sido eliminadas");
+    }
+  };
+
 	useEffect(() => {
 		  const iniciar = async () => {
 		  const usuarioExiste = await existeUsuario();
@@ -124,7 +139,14 @@ const Home = () => {
 					{listaDeTareas.length === 0?"No hay tareas, añadir tareas":`Quedan ${listaDeTareas.length} tareas por completar`}</li>
 					
 				</ul>
-				
+				<div className="text-center mb-3">
+  					<button type="button" className="btn btn-primary" onClick={() => {
+      					listaDeTareas.forEach((tarea) => eliminarTarea(tarea.id));
+    				}}
+  					>
+    					Eliminar todas las tareas
+  					</button>
+				</div>
 							
 				
 		
