@@ -4,7 +4,7 @@ import React, {useState, useEffect} from "react";
 const Home = () => {
 
 	let [listaDeTareas, setListaDeTareas] = useState([])
-
+	let [nuevaTarea, setNuevaTarea] = useState("");
 	
 	const cargarTareas = async () => {
 		const url = "https://playground.4geeks.com/todo/users/rcbarreto";
@@ -48,13 +48,13 @@ const Home = () => {
 					'Content-Type' : 'application/json'
 				},
 				body: JSON.stringify({
-					label: document.getElementById("tareaNueva").value,
+					label: nuevaTarea,
 					is_done: false
 				})
 			})
 			
 			if(resp.ok){
-				document.getElementById("tareaNueva").value = ""
+				setNuevaTarea("")
 				cargarTareas()
 			}
 		
@@ -110,10 +110,10 @@ const Home = () => {
 
 			<div className="mx-auto col-6">
 		
-				<input id = "tareaNueva" type="text" className="form-control mb-3" placeholder=" ¿Que necesitas hacer?" onKeyDown={(e) => {
-					agregarTareas(e)
-      				}}/
-				>
+				<input id = "tareaNueva" type="text" className="form-control mb-3" placeholder=" ¿Que necesitas hacer?" value={nuevaTarea}
+          			onChange={(e) => setNuevaTarea(e.target.value)}
+          			onKeyDown={agregarTareas}
+				/>
 
 						
 				<ul className="list-group list-group-flush">
